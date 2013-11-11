@@ -279,7 +279,7 @@ int main(int argc, char **argv) {
 	}
 	debug("Device address:             0x%02x\n", sensorAddr);
 	debug("Sample count:          %9u\n", sampleCount);
-	debug("Delay between samples: %9ums\n", delayMS);
+	debug("Delay between samples: %9uus\n", delayMS);
 	if (outFilename) {
 		debug("Output filename: %15s\n", outFilename);
 	}

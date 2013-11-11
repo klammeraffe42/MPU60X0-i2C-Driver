@@ -16,12 +16,20 @@ set(driver_SRC
 	src/mpu60X0_i2c.c
 )
 
+set(driver_dummy_SRC
+	src/mpu60X0_i2c_dummy.c
+)
+
 set(logger_SRC
-	${driver_SRC}
 	src/mpu60X0_mockwriter.cpp
 	src/mpu60X0_logger.cpp
 )
 
 
+add_library(mpu60X0_i2c_dummy ${driver_dummy_SRC})
+add_executable(mpu60X0_i2c_logger_dummy ${logger_SRC})
+target_link_libraries(mpu60X0_i2c_logger_dummy mpu60X0_i2c_dummy)
+
 add_library(mpu60X0_i2c ${driver_SRC})
 add_executable(mpu60X0_i2c_logger ${logger_SRC})
+target_link_libraries(mpu60X0_i2c_logger mpu60X0_i2c)
