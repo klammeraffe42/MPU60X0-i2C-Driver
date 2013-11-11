@@ -36,7 +36,7 @@
  * To retrieve the full I2C address use (0x68 | (ADR0 ? 0x02 : 0x00)) 
  * with ADR0 as value of the address input pin. 
  */
-#define MPU60X0_I2C_SLAVE_ADDR 0x68
+#define MPU60X0_I2C_SLAVE_ADDR 0x68u
 
 /**
  * Defines the axes of the sensor.
@@ -116,7 +116,7 @@ extern void mpu60X0_i2c_getAcceleration(const struct MPU60X0_I2C *, float *);
  * @param The axis to read.
  * @return The .
  */
-extern float mpu60X_i2c_getAngularSpeedAxis(const struct MPU60X0_I2C *, const enum MPU60X0_AXIS);
+extern float mpu60X0_i2c_getAngularSpeedAxis(const struct MPU60X0_I2C *, const enum MPU60X0_AXIS);
 
 /**
  * Returns the angular speed in all three dimensions.
