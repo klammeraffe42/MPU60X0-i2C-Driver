@@ -24,7 +24,19 @@
 #ifndef _MPU60X0_I2C_H
 #define _MPU60X0_I2C_H
 
-#include <ctype.h>
+#include <inttypes.h>
+
+/**
+ * The default MPU60X0 I2C slave address mask.
+ * 
+ * The address of MPU60X0 depends on the state of the address input pin
+ * (ADR0). The pin state defines the state of the second least 
+ * significant bit in the I2C slave address.
+ * 
+ * To retrieve the full I2C address use (0x68 | (ADR0 ? 0x02 : 0x00)) 
+ * with ADR0 as value of the address input pin. 
+ */
+#define MPU60X0_I2C_SLAVE_ADDR 0x68
 
 /**
  * Defines the axes of the sensor.
@@ -36,7 +48,7 @@ enum MPU60X0_AXIS {
 };
 
 /**
- * Defines the acceleromter full-scale range in G=9.81m/s²
+ * Defines the accelerometer full-scale range in G=9.81m/s²
  */
 enum MPU60X0_ACCELERATION_WORKING_RANGE {
 	MPU60X0_ACCELERATION_WORKING_RANGE_2G = 0,
@@ -46,7 +58,7 @@ enum MPU60X0_ACCELERATION_WORKING_RANGE {
 };
 
 /**
- * Defines the gyroscope full-scale range in degree per second
+ * Defines the gyroscope full-scale range in degrees per second
  */
 enum MPU60X0_ANGULAR_SPEED_WORKING_RANGE {
 	MPU60X0_ANGULAR_SPEED_WORKING_RANGE_250 = 0,
@@ -60,7 +72,7 @@ enum MPU60X0_ANGULAR_SPEED_WORKING_RANGE {
  * with the device.
  * 
  * @param The device i2c address
- * @return device object pinter
+ * @return device object pointer
  */
 extern struct MPU60X0_I2C *mpu60X0_i2c_new(const uint8_t addr);
 

@@ -1,4 +1,5 @@
 
+#include "mpu60X0_i2c.h"
 
 struct MPU60X0_I2C {
 	uint8_t c_addr;
