@@ -1,5 +1,5 @@
 /*
- * mpu60X0_i2c.h
+ * struct MPU60X0_I2C *.h
  * 
  * Copyright 2013 Klammeraffe42 <klammeraffe42@gmail.com>
  *
@@ -25,6 +25,10 @@
 #define _MPU60X0_I2C_H
 
 #include <inttypes.h>
+
+#ifdef __cplusplus
+	extern "C" { 
+#endif
 
 /**
  * The default MPU60X0 I2C slave address mask.
@@ -74,14 +78,14 @@ enum MPU60X0_ANGULAR_SPEED_WORKING_RANGE {
  * @param The device i2c address
  * @return device object pointer
  */
-extern struct MPU60X0_I2C *mpu60X0_i2c_new(const uint8_t addr);
+extern struct MPU60X0_I2C * mpu60X0_i2c_new(const uint8_t);
 
 /**
  * Destroys a device object.
  * 
  * @param The object to destroy
  */
-extern void mpu60X0_i2c_free(const struct MPU60X0_I2C *);
+extern void mpu60X0_i2c_free(struct MPU60X0_I2C *);
 
 /**
  * Returns the device identifier of a MPU60X0 sensor.
@@ -89,7 +93,7 @@ extern void mpu60X0_i2c_free(const struct MPU60X0_I2C *);
  * @param The device object.
  * @return The device identifier.
  */
-extern uint8_t mpu60X0_i2c_whoAmI(const struct MPU60X0_I2C *);
+extern uint8_t mpu60X0_i2c_whoAmI(struct MPU60X0_I2C *);
 
 /**
  * Returns a 1-dimensional linear acceleration from the device object.
@@ -98,7 +102,7 @@ extern uint8_t mpu60X0_i2c_whoAmI(const struct MPU60X0_I2C *);
  * @param The axis to read.
  * @return The acceleration in direction the direction specified.
  */
-extern float mpu60X0_i2c_getAccelerationAxis(const struct MPU60X0_I2C *, const enum MPU60X0_AXIS);
+extern float mpu60X0_i2c_getAccelerationAxis(struct MPU60X0_I2C *, const enum MPU60X0_AXIS);
 
 /**
  * Returns the linear acceleration in all three dimensions.
@@ -106,7 +110,7 @@ extern float mpu60X0_i2c_getAccelerationAxis(const struct MPU60X0_I2C *, const e
  * @param The device object.
  * @param Pointer to write to.
  */
-extern void mpu60X0_i2c_getAcceleration(const struct MPU60X0_I2C *, float *);
+extern void mpu60X0_i2c_getAcceleration(struct MPU60X0_I2C *, float *);
 
 
 /**
@@ -116,7 +120,7 @@ extern void mpu60X0_i2c_getAcceleration(const struct MPU60X0_I2C *, float *);
  * @param The axis to read.
  * @return The .
  */
-extern float mpu60X0_i2c_getAngularSpeedAxis(const struct MPU60X0_I2C *, const enum MPU60X0_AXIS);
+extern float mpu60X0_i2c_getAngularSpeedAxis(struct MPU60X0_I2C *, const enum MPU60X0_AXIS);
 
 /**
  * Returns the angular speed in all three dimensions.
@@ -124,7 +128,7 @@ extern float mpu60X0_i2c_getAngularSpeedAxis(const struct MPU60X0_I2C *, const e
  * @param The device object.
  * @param The pointer to write to.
  */
-extern void mpu60X0_i2c_getAngularSpeed(const struct MPU60X0_I2C *, float *);
+extern void mpu60X0_i2c_getAngularSpeed(struct MPU60X0_I2C *, float *);
 
 /**
  * Returns the temperatur from the device object.
@@ -132,7 +136,7 @@ extern void mpu60X0_i2c_getAngularSpeed(const struct MPU60X0_I2C *, float *);
  * @param The device object.
  * @return The temperatur of the sensor in °C.
  */
-extern float mpu60X0_i2c_getTemperature(const struct MPU60X0_I2C *);
+extern float mpu60X0_i2c_getTemperature(struct MPU60X0_I2C *);
 
 /**
  * Sets the working range for the acceleration sensor in the device 
@@ -141,7 +145,7 @@ extern float mpu60X0_i2c_getTemperature(const struct MPU60X0_I2C *);
  * @param The device object.
  * @param The working range.
  */
-extern void mpu60X0_i2c_setAccelerationWorkingRange(const struct MPU60X0_I2C *, const enum MPU60X0_ACCELERATION_WORKING_RANGE);
+extern void mpu60X0_i2c_setAccelerationWorkingRange(struct MPU60X0_I2C *, const enum MPU60X0_ACCELERATION_WORKING_RANGE);
 
 /**
  * Returns the working range for the acceleration sensor in the device 
@@ -150,7 +154,7 @@ extern void mpu60X0_i2c_setAccelerationWorkingRange(const struct MPU60X0_I2C *, 
  * @param The device object.
  * @return The working range.
  */
-extern enum MPU60X0_ACCELERATION_WORKING_RANGE mpu60X0_i2c_getAccelerationWorkingRange(const struct MPU60X0_I2C *);
+extern enum MPU60X0_ACCELERATION_WORKING_RANGE mpu60X0_i2c_getAccelerationWorkingRange(struct MPU60X0_I2C *);
 
 /**
  * Sets the working range for the gyroscope sensor in the device object.
@@ -158,7 +162,7 @@ extern enum MPU60X0_ACCELERATION_WORKING_RANGE mpu60X0_i2c_getAccelerationWorkin
  * @param The device object.
  * @param The working range.
  */
-extern void mpu60X0_i2c_setAngularSpeedWorkingRange(const struct MPU60X0_I2C *, const enum MPU60X0_ANGULAR_SPEED_WORKING_RANGE);
+extern void mpu60X0_i2c_setAngularSpeedWorkingRange(struct MPU60X0_I2C *, const enum MPU60X0_ANGULAR_SPEED_WORKING_RANGE);
 
 /**
  * Returns the working range for the gyroscope sensor in the device 
@@ -168,35 +172,35 @@ extern void mpu60X0_i2c_setAngularSpeedWorkingRange(const struct MPU60X0_I2C *, 
  * @param The axis to read.
  * @return The device identifier.
  */
-extern enum MPU60X0_ANGULAR_SPEED_WORKING_RANGE mpu60X0_i2c_getAngularSpeedWorkingRange(const struct MPU60X0_I2C *);
+extern enum MPU60X0_ANGULAR_SPEED_WORKING_RANGE mpu60X0_i2c_getAngularSpeedWorkingRange(struct MPU60X0_I2C *);
 
 /**
  * Reads the device configuration to the device object.
  * 
  * @param The device object.
  */
-extern void mpu60X0_i2c_readConfiguration(const struct MPU60X0_I2C *);
+extern void mpu60X0_i2c_readConfiguration(struct MPU60X0_I2C *);
 
 /**
  * Writes the configuration from the device object to the sensor.
  * 
  * @param The device object.
  */
-extern void mpu60X0_i2c_writeConfiguration(const struct MPU60X0_I2C *);
+extern void mpu60X0_i2c_writeConfiguration(struct MPU60X0_I2C *);
 
 /**
  * Reads the linear acceleration from the device to the device object.
  * 
  * @param The device object.
  */
-extern void mpu60X0_i2c_readAcceleration(const struct MPU60X0_I2C *);
+extern void mpu60X0_i2c_readAcceleration(struct MPU60X0_I2C *);
 
 /**
  * Reads angular speed from the device to the device object.
  * 
  * @param The device object.
  */
-extern void mpu60X0_i2c_readAngularSpeed(const struct MPU60X0_I2C *);
+extern void mpu60X0_i2c_readAngularSpeed(struct MPU60X0_I2C *);
 
 /**
  * Reads the temperatur of the sensor from the device to the device 
@@ -204,13 +208,17 @@ extern void mpu60X0_i2c_readAngularSpeed(const struct MPU60X0_I2C *);
  * 
  * @param The device object.
  */
-extern void mpu60X0_i2c_readTemperature(const struct MPU60X0_I2C *);
+extern void mpu60X0_i2c_readTemperature(struct MPU60X0_I2C *);
 
 /**
  * Reads all data from the device to the device object.
  * 
  * @param The device object.
  */
-extern void mpu60X0_i2c_readData(const struct MPU60X0_I2C *);
+extern void mpu60X0_i2c_readData(struct MPU60X0_I2C *);
 
+
+#ifdef __cplusplus
+	}
+#endif
 #endif
